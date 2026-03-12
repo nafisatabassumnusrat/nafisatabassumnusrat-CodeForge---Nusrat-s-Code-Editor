@@ -1,6 +1,6 @@
-# -CodeForge
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&text=CodeForge%20-%20Nusrat's%20Code%20Editor&section=header&textBg=false&fontColor=4666B4&fontSize=45&fontAlignY=50&rotate=0&animation=scaleIn&reversal=true&fontAlign=50/>
+# CodeForge - Nusrat's Code Editor
+ <p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&text=CodeForge%20-%20Nusrat's%20Code%20Editor&section=header&textBg=false&fontColor=4666B4&fontSize=45&fontAlignY=50&rotate=0&animation=scaleIn&reversal=true&fontAlign=50">
 </p>
 
 

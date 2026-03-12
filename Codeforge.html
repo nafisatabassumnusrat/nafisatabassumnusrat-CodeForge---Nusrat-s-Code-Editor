@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nusrat's Code Editor</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2300d4ff%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23a855f7%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22url(%23g)%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2222%22%20font-family%3D%22monospace%22%20font-weight%3D%22900%22%20font-size%3D%2214%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3E%26lt%3B%2F%26gt%3B%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+     LOADING SCREEN
+════════════════════════════════════════ -->
+  <div id="loader">
+
+    <!-- Logo row -->
+    <div class="loader-logo-row">
+      <div class="loader-logo-icon">&lt;/&gt;</div>
+      <span class="loader-logo-name">Nusrat's Code Editor</span>
+    </div>
+
+    <!-- Code symbols -->
+    <div class="loader-symbols">
+      <span class="sym">&lt;&gt;</span>
+      <span class="sym">{}</span>
+      <span class="sym">&lt;/&gt;</span>
+      <span class="sym">CSS</span>
+      <span class="sym">JS</span>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
+    </div>
+
+    <!-- Blinking text -->
+    <div class="loader-text">Loading Nusrat's Code Editor...</div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════════
+     MAIN SITE (hidden until loader ends)
+════════════════════════════════════════ -->
+  <div id="site">
+
+    <!-- ─── NAVBAR ─── -->
+    <nav>
+      <div class="nav-logo" onclick="showPage('home')">
+        <div class="nav-logo-icon">&lt;/&gt;</div>
+        <span>CodeForge</span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a onclick="showPage('home')" class="active" data-page="home">Home</a></li>
+        <li><a onclick="showPage('editor')" data-page="editor">Code Editor</a></li>
+
+        <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+      </ul>
+
+      <!-- Light / Dark toggle -->
+      <div class="theme-toggle">
+        <span class="toggle-label">Dark</span>
+        <div class="toggle-track" onclick="toggleTheme()" title="Switch theme">
+          <div class="toggle-knob">🌙</div>
+        </div>
+      </div>
+
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+
+    <!-- ═══════════════════════════════════════
+       HOME PAGE
+  ════════════════════════════════════════ -->
+    <div id="page-home" class="page active">
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+
+        <div class="hero-badge">✦ Browser-Based Development Environment</div>
+
+        <h1 class="hero-title">
+          Online<br>
+          <span class="gradient">Code Editor</span>
+        </h1>
+
+        <p class="hero-desc">
+          Write and test HTML, CSS and JavaScript code directly in your browser.
+          No installation required  instant live preview.
+        </p>
+
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('editor')">▶ Open HTML/CSS/JS Editor</button>
+        </div>
+
+        <!-- Code preview window -->
+        <div class="hero-preview">
+          <div class="preview-bar">
+            <div class="preview-dot"></div>
+            <div class="preview-dot"></div>
+            <div class="preview-dot"></div>
+            <div class="preview-title">index.html — Nusrat's CodeForge</div>
+          </div>
+          <div class="preview-code">
+            <div class="code-line"><span class="ln">1</span><span><span class="comment">/* Welcome to Nusrat's CodeForge
+                  ✦ */</span></span></div>
+            <div class="code-line"><span class="ln">2</span><span><span class="tag">&lt;!DOCTYPE</span> <span
+                  class="prop">html</span><span class="tag">&gt;</span></span></div>
+            <div class="code-line"><span class="ln">3</span><span><span class="tag">&lt;html</span> <span
+                  class="prop">lang</span>=<span class="str">"en"</span><span class="tag">&gt;</span></span></div>
+            <div class="code-line"><span class="ln">4</span><span><span class="tag">&lt;body</span> <span
+                  class="prop">style</span>=<span class="str">"background:#0a0b0f"</span><span
+                  class="tag">&gt;</span></span></div>
+            <div class="code-line"><span class="ln">5</span><span>&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span><span
+                  class="kw">Hello, World!</span><span class="tag">&lt;/h1&gt;</span></span></div>
+            <div class="code-line"><span class="ln">6</span><span><span
+                  class="tag">&lt;/body&gt;&lt;/html&gt;</span><span class="typing-cursor"></span></span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <div class="stats-strip">
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Live Previews</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0ms</div>
+          <div class="stat-label">Setup Time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Browser Native</div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="section">
+        <div class="section-label">✦ Features</div>
+        <div class="section-title">
+          Built for
+          <span
+            style="background:var(--gradient-2);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Developers</span>
+        </div>
+        <p class="section-desc">
+          Everything you need to prototype, test, and learn  all within your browser tab.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(255,107,53,0.12)">⚡</div>
+            <h3>Live Code Editing</h3>
+            <p>Changes reflect instantly as you type. HTML, CSS and JS output updates in real time without pressing run.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(0,255,136,0.1)">👁</div>
+            <h3>Instant Output Preview</h3>
+            <p>A live iframe renders your page on the right side, giving immediate visual feedback on every change.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(33,150,243,0.1)">🎨</div>
+            <h3>HTML + CSS + JS Support</h3>
+            <p>Three dedicated panels, colour-coded and labelled, keeping your workflow clean and organised.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(168,85,247,0.1)">🌗</div>
+            <h3>Light &amp; Dark Theme</h3>
+            <p>Switch between dark and light modes instantly. Your preference is saved across sessions automatically.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(255,215,0,0.1)">📱</div>
+            <h3>Fully Responsive</h3>
+            <p>Works beautifully on any screen size  desktop, tablet, or mobile. Code wherever you are.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="how-strip">
+        <div class="section">
+          <div class="section-label">✦ How It Works</div>
+          <div class="section-title">
+            Three Steps to
+            <span
+              style="background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Run Your
+              Code</span>
+          </div>
+          <div class="step-grid">
+            <div class="step-item">
+              <div class="step-circle-1">1</div>
+              <h3>Choose an Editor</h3>
+              <p>Pick HTML/CSS/JS for web code, or the C editor for systems programming.</p>
+            </div>
+            <div class="step-item">
+              <div class="step-circle-2">2</div>
+              <h3>Write Your Code</h3>
+              <p>Type directly into the panels with syntax colour highlighting for readability.</p>
+            </div>
+            <div class="step-item">
+              <div class="step-circle-3">3</div>
+              <h3>See the Output</h3>
+              <p>Results appear instantly  no save, no reload, no friction whatsoever.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-home -->
+
+
+    <!-- ═══════════════════════════════════════
+       HTML / CSS / JS EDITOR PAGE
+  ════════════════════════════════════════ -->
+    <div id="page-editor" class="page editor-page">
+
+      <div class="editor-topbar">
+        <div class="editor-topbar-title">
+          <span>📝</span>
+          <span>HTML / CSS / JavaScript Editor</span>
+          <span class="lang-tag lang-html">HTML</span>
+          <span class="lang-tag lang-css">CSS</span>
+          <span class="lang-tag lang-js">JS</span>
+        </div>
+        <button class="run-btn" onclick="runCode()">▶ Run</button>
+      </div>
+
+      <div class="editor-layout">
+
+        <!-- LEFT: Editor panels -->
+        <div class="editor-panels">
+
+          <!-- HTML -->
+          <div class="editor-panel">
+            <div class="panel-header">
+              <div class="panel-dot html-dot"></div>
+              <span class="html-label">HTML</span>
+            </div>
+            <div class="panel-content">
+              <textarea class="code-textarea" id="html-editor" spellcheck="false" oninput="liveUpdate()"></textarea>
+            </div>
+          </div>
+
+          <!-- CSS -->
+          <div class="editor-panel">
+            <div class="panel-header">
+              <div class="panel-dot css-dot"></div>
+              <span class="css-label">CSS</span>
+            </div>
+            <div class="panel-content">
+              <textarea class="code-textarea" id="css-editor" spellcheck="false" oninput="liveUpdate()"></textarea>
+            </div>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="editor-panel">
+            <div class="panel-header">
+              <div class="panel-dot js-dot"></div>
+              <span class="js-label">JavaScript</span>
+            </div>
+            <div class="panel-content">
+              <textarea class="code-textarea" id="js-editor" spellcheck="false" oninput="liveUpdate()"></textarea>
+            </div>
+          </div>
+
+        </div><!-- /editor-panels -->
+
+        <!-- RIGHT: Live preview -->
+        <div class="output-panel">
+          <div class="output-header">
+            <div class="output-dot"></div>
+            <span>OUTPUT</span>
+          </div>
+          <iframe id="preview-frame"></iframe>
+        </div>
+
+      </div><!-- /editor-layout -->
+    </div><!-- /page-editor -->
+
+
+
+
+    <!-- ═══════════════════════════════════════
+       CONTACT PAGE
+  ════════════════════════════════════════ -->
+    <div id="page-contact" class="page">
+      <div class="section">
+        <div class="contact-grid">
+
+          <div class="contact-info">
+            <div class="section-label">✦ Get in Touch</div>
+            <h2>Contact the<br>
+              <span
+                style="background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Developer</span>
+            </h2>
+            <p>Have a question, feature request, or found a bug? Fill out the form and I'll get back to you as soon as
+              possible.</p>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">📧</div>
+              <span>support@codeforge.dev</span>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">🌐</div>
+              <span>codeforge.dev</span>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon">💬</div>
+              <span>Response within 24 hours</span>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-input" id="contact-name" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" id="contact-email" placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="form-textarea" id="contact-msg"
+                placeholder="Tell me about your question or feedback..."></textarea>
+            </div>
+            <button class="form-submit" onclick="submitContact()">Send Message →</button>
+            <div class="form-success" id="form-success">✓ Message sent! I'll be in touch soon.</div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /page-contact -->
+
+
+    <!-- ═══════════════════════════════════════
+       PRIVACY POLICY PAGE
+  ════════════════════════════════════════ -->
+    <div id="page-privacy" class="page">
+      <div class="policy-wrap">
+        <h1>Privacy Policy</h1>
+        <div class="policy-date">Last updated: January 2025</div>
+
+        <div class="policy-section">
+          <h2>1. Overview</h2>
+          <p>Nusrat's Code Editor ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy
+            explains how we handle information when you use our online code editor.</p>
+        </div>
+        <div class="policy-section">
+          <h2>2. Information We Do Not Collect</h2>
+          <p>The editor operates entirely in your browser. We do not collect, store, or transmit:</p>
+          <ul>
+            <li>Your source code or editor content</li>
+            <li>Personal identification information</li>
+            <li>Usage analytics or session recordings</li>
+            <li>Browser fingerprinting data</li>
+          </ul>
+        </div>
+        <div class="policy-section">
+          <h2>3. Contact Form Data</h2>
+          <p>If you use our contact form, your name, email, and message may be stored to allow us to respond. This data
+            is not shared with third parties.</p>
+        </div>
+        <div class="policy-section">
+          <h2>4. Cookies</h2>
+          <p>We use only a minimal localStorage key to remember your light/dark theme preference. No tracking cookies
+            are used.</p>
+        </div>
+        <div class="policy-section">
+          <h2>5. Third-Party Services</h2>
+          <p>We use Google Fonts to load typography. Google may receive your IP address when fonts are loaded. Please
+            refer to Google's Privacy Policy for details.</p>
+        </div>
+        <div class="policy-section">
+          <h2>6. Data Security</h2>
+          <p>Since all code editing happens locally in your browser, your code never leaves your device. No server-side
+            storage of code is performed.</p>
+        </div>
+        <div class="policy-section">
+          <h2>7. Changes</h2>
+          <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated
+            revision date.</p>
+        </div>
+        <div class="policy-section">
+          <h2>8. Contact</h2>
+          <p>Questions? <span class="policy-link" onclick="showPage('contact')">Contact us here.</span></p>
+        </div>
+      </div>
+    </div><!-- /page-privacy -->
+
+
+    <!-- ═══════════════════════════════════════
+       TERMS & CONDITIONS PAGE
+  ════════════════════════════════════════ -->
+    <div id="page-terms" class="page">
+      <div class="policy-wrap">
+        <h1>Terms &amp; Conditions</h1>
+        <div class="policy-date">Last updated: January 2025</div>
+
+        <div class="policy-section">
+          <h2>1. Acceptance of Terms</h2>
+          <p>By accessing and using Nusrat's Code Editor, you agree to be bound by these Terms and Conditions. If you do
+            not agree, please discontinue use.</p>
+        </div>
+        <div class="policy-section">
+          <h2>2. Permitted Use</h2>
+          <p>The editor is provided for educational and development purposes. You may use it to:</p>
+          <ul>
+            <li>Write, test, and learn HTML, CSS, JavaScript, and C code</li>
+            <li>Prototype web interfaces and algorithms</li>
+            <li>Share code snippets with others for educational purposes</li>
+          </ul>
+        </div>
+        <div class="policy-section">
+          <h2>3. Prohibited Activities</h2>
+          <p>You agree not to use this editor to:</p>
+          <ul>
+            <li>Write or distribute malicious code, malware, or exploits</li>
+            <li>Attempt to circumvent browser security mechanisms</li>
+            <li>Use the service for any unlawful purpose</li>
+          </ul>
+        </div>
+        <div class="policy-section">
+          <h2>4. Intellectual Property</h2>
+          <p>Code you write remains your intellectual property. The editor interface, design, and tooling are owned by
+            Nafisa Tabassum Nusrat and protected under applicable copyright laws.</p>
+        </div>
+        <div class="policy-section">
+          <h2>5. Disclaimer of Warranties</h2>
+          <p>The editor is provided "as is" without warranties of any kind. We do not guarantee uninterrupted
+            availability or error-free operation.</p>
+        </div>
+        <div class="policy-section">
+          <h2>6. Limitation of Liability</h2>
+          <p>To the maximum extent permitted by law, Nusrat's Code Editor shall not be liable for any indirect,
+            incidental, or consequential damages arising from your use of the service.</p>
+        </div>
+        <div class="policy-section">
+          <h2>7. Modifications</h2>
+          <p>We reserve the right to modify these terms at any time. Continued use constitutes acceptance of the updated
+            terms.</p>
+        </div>
+      </div>
+    </div><!-- /page-terms -->
+
+
+    <!-- ═══════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+    <footer>
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">&lt;/&gt;</div>
+            <span>CodeForge</span>
+          </div>
+          <p>This online code editor allows developers and students to test HTML, CSS, JavaScript, and C code directly
+            in the browser  no setup, no downloads, no friction.</p>
+        </div>
+
+        <!-- Navigate -->
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('editor')">HTML/CSS/JS Editor</a></li>
+            <li><a onclick="showPage('contact')">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
+            <li><a onclick="showPage('terms')">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+
+        <!-- Languages -->
+        <div class="footer-col">
+          <h4>Languages</h4>
+          <ul>
+            <li><a>HTML5</a></li>
+            <li><a>CSS3</a></li>
+            <li><a>JavaScript ES6+</a></li>
+          </ul>
+        </div>
+
+        <!-- Developer Credit -->
+        <div class="footer-dev-card">
+          <h4>Developer</h4>
+          
+          <p class="dev-credit-text">
+            Designed and Developed by
+            <span class="dev-highlight">Nafisa Tabassum Nusrat</span><br>
+            
+           <i><strong>Front-End Web Developer </strong></i>
+          </p>
+          <div class="dev-socials">
+            <a class="dev-btn dev-btn-gh" href="https://github.com/nafisatabassumnusrat" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.43 7.88 10.96.58.1.79-.25.79-.56v-2c-3.2.69-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98.01 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.8.56C20.2 21.43 23.5 17.1 23.5 12 23.5 5.65 18.35.5 12 .5z" />
+              </svg>
+              GitHub
+            </a>
+            <a class="dev-btn dev-btn-li" href="https://www.linkedin.com/in/nafisa-tabassum-nusrat-57134721a/" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.22 0z" />
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /footer-grid -->
+
+      <div class="footer-bottom">
+        <p>© 2026 <span>Nusrat's Code Editor</span> — Built for Developers &amp; Students</p>
+        <p>Made  by <span class="dev-highlight"> Nafisa Tabassum Nusrat</span></p>
+      </div>
+
+    </footer>
+
+  </div><!-- /site -->
+
+
+  <!-- Toast notification -->
+  <div id="toast"></div>
+
+  <!-- script.js -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
